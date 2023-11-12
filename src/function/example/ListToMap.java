@@ -17,7 +17,6 @@ public class ListToMap {
         Function<String,Integer> function = s -> s.length();
         convertListToMap(stringList,function);
     }
-
     private static void convertListToMap(List<String> stringList, Function<String, Integer> function) {
         Map<String,Integer> map = new HashMap<>();
         for (String str:stringList) {
