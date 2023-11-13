@@ -17,5 +17,16 @@ public class GenerateOTP {
             return otp;
         };
         System.out.println(otpGenerator.get());
+
+        Supplier<String> otpCharactorGenerator = () -> {
+            String otp = "";
+            String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Supplier<Character> character=()->str.charAt((int)(Math.random()*26));
+            for (int i=0;i<5;i++){
+                otp =otp + character.get();
+            }
+            return otp;
+        };
+        System.out.println(otpCharactorGenerator.get());
     }
 }
