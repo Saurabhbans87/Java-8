@@ -6,6 +6,7 @@
 package stream.create;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,5 +44,27 @@ public class StreamCreation {
         List<Employee> employees2 = employeeList.stream().filter(employee -> employee.firstName.length() > 5).collect(Collectors.toList());
         System.out.println("***********************************************************");
         System.out.println(employees2);
+        System.out.println("***********************************************************");
+        List<String> firstNames = employeeList.stream().map(Employee::getFirstName).collect(Collectors.toList());
+        System.out.println(firstNames);
+        System.out.println("***********************************************************");
+        List<String> lastNames = employeeList.stream().map(Employee::getLastName).collect(Collectors.toList());
+        System.out.println(lastNames);
+
+        System.out.println("****************************Student*******************************");
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student("Vikram", Arrays.asList("Math","Chemistry"),"Bangalore"));
+        studentList.add(new Student("Ranjit", Arrays.asList("History","Hindi","Computer Science"),"Bangalore"));
+        studentList.add(new Student("Rahul", Arrays.asList("Hindi","English"),"Chemical"));
+
+        List<String> studentNames = studentList.stream().map(Student::getName).collect(Collectors.toList());
+        System.out.println(studentNames);
+
+        System.out.println("****************************Student*******************************");
+
+        List<String> studentSubject = studentList.stream().flatMap(student -> student.getSubject().stream()).collect(Collectors.toList());
+        System.out.println(studentSubject);
+
+
     }
 }
