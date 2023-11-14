@@ -5,8 +5,13 @@
  */
 package stream.ems;
 
+import function.total.EmployeeTotalSalary;
+
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EmployeeProcessing {
     public static void main(String[] args) {
@@ -14,7 +19,7 @@ public class EmployeeProcessing {
         employeeList.add(
                 new Employee("Raghu","Bangalore",101,26,"Male","Engineering",1000000));
         employeeList.add(
-                new Employee("Jason","Hyderabad",102,30,"Male","Engineering",2000000));
+                new Employee("Jason","Hyderabad",102,30,"Male","Engineering",2500000));
         employeeList.add(
                 new Employee("Samantha","Chennai",103,28,"Female","HR",1000000));
         employeeList.add(
@@ -46,6 +51,15 @@ public class EmployeeProcessing {
         //count all employee
         long allEemployeeCount = employeeList.stream().count();
         System.out.println(allEemployeeCount);
+        //All department
+        List<String> allDepartment = employeeList.stream().map(Employee::getEmployeeDepartment).distinct().collect(Collectors.toList());
+        System.out.println(allDepartment);
+        //Average age of male employee
+        Map<String, Double> averageEmployee = employeeList.stream().collect(Collectors.groupingBy(Employee::getEmployeeGender, Collectors.averagingInt(Employee::getEmployeeAge)));
+        System.out.println(averageEmployee);
+        //Average salary of male employee
+        DoubleSummaryStatistics maleAverageSalary = employeeList.stream().filter(employee -> employee.getEmployeeGender().equals("Male")).collect(Collectors.summarizingDouble(Employee::getEmployeeSalary));
+        System.out.println(maleAverageSalary);
 
     }
 }
