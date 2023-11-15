@@ -7,10 +7,7 @@ package stream.ems;
 
 import function.total.EmployeeTotalSalary;
 
-import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EmployeeProcessing {
@@ -29,7 +26,7 @@ public class EmployeeProcessing {
         employeeList.add(
                 new Employee("Anjali","Delhi",106,26,"Female","Finance",1000000));
         employeeList.add(
-                new Employee("Suman","Delhi",107,26,"Female","Finance",1000000));
+                new Employee("Suman","Delhi",107,24,"Female","Finance",1000000));
         employeeList.add(
                 new Employee("Pooja","Noida",108,28,"Female","Engineering",2000000));
         employeeList.add(
@@ -60,6 +57,35 @@ public class EmployeeProcessing {
         //Average salary of male employee
         DoubleSummaryStatistics maleAverageSalary = employeeList.stream().filter(employee -> employee.getEmployeeGender().equals("Male")).collect(Collectors.summarizingDouble(Employee::getEmployeeSalary));
         System.out.println(maleAverageSalary);
+        //highest paid employee
+        Optional<Employee> highestPaidEmployee = employeeList.stream().collect(Collectors.maxBy(Comparator.comparing(Employee::getEmployeeSalary)));
+        System.out.println(highestPaidEmployee.get().employeeName);
+        //get all employee whose age is greater then 30
+        employeeList.stream().filter(employee -> employee.employeeAge > 30).map(employee -> employee.employeeName).forEach(System.out::println);
+        //count he employee in each department
+        Map<String, Long> employeeEachDepartment = employeeList.stream().collect(Collectors.groupingBy(Employee::getEmployeeDepartment, Collectors.counting()));
+        System.out.println(employeeEachDepartment);
+        //Each department average salary
+        Map<String, Double> departmentAverageSalary = employeeList.stream().collect(Collectors.groupingBy(Employee::getEmployeeDepartment, Collectors.averagingDouble(Employee::getEmployeeSalary)));
+        System.out.println(departmentAverageSalary);
+        //Youngest male employee
+        Optional<Employee> youngestMaleEmployee = employeeList.stream().filter(employee -> employee.employeeGender.equals("Male")).min(Comparator.comparing(Employee::getEmployeeAge));
+        System.out.println(youngestMaleEmployee.get().employeeName);
+        System.out.println(youngestMaleEmployee.get().employeeDepartment);
+        //Youngest female employee
+        Optional<Employee> youngestFemaleEmployee = employeeList.stream().filter(employee -> employee.employeeGender.equals("Female")).min(Comparator.comparing(Employee::getEmployeeAge));
+        System.out.println(youngestFemaleEmployee.get().employeeName);
+        System.out.println(youngestFemaleEmployee.get().employeeDepartment);
+
+        //Oldest male employee
+        Optional<Employee> oldestMaleEmployee = employeeList.stream().filter(employee -> employee.employeeGender.equals("Male")).max(Comparator.comparing(Employee::getEmployeeAge));
+        System.out.println(oldestMaleEmployee.get().employeeName);
+        System.out.println(oldestMaleEmployee.get().employeeDepartment);
+        //Oldest female employee
+        Optional<Employee> oldestFemaleEmployee = employeeList.stream().filter(employee -> employee.employeeGender.equals("Female")).max(Comparator.comparing(Employee::getEmployeeAge));
+        System.out.println(oldestFemaleEmployee.get().employeeName);
+        System.out.println(oldestFemaleEmployee.get().employeeDepartment);
+
 
     }
 }
