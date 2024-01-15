@@ -25,7 +25,13 @@ public class Spliterator {
         java.util.Spliterator<String> spliterator2 = list.spliterator();
         while (spliterator2.tryAdvance(System.out::println));
 
-
+        System.out.println("Iterating spliterator using trySplit");
+        java.util.Spliterator<String> spliterator3 = list.spliterator();
+        java.util.Spliterator<String> splitSpliterator = spliterator3.trySplit();
+        System.out.println("Original spliterator");
+        spliterator3.forEachRemaining(System.out::println);
+        System.out.println("Split spliterator");
+        splitSpliterator.forEachRemaining(System.out::println);
 
 
     }
