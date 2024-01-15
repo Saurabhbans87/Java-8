@@ -33,6 +33,13 @@ public class Spliterator {
         System.out.println("Split spliterator");
         splitSpliterator.forEachRemaining(System.out::println);
 
+        System.out.println("Spliterator estimateSize");
+        java.util.Spliterator<String> spliterator4 = list.spliterator();
+        long estimateSize = spliterator4.estimateSize();
+        System.out.println(estimateSize);
+        spliterator4.tryAdvance(System.out::println);
+        long estimateSize1 = spliterator4.estimateSize();
+        System.out.println(estimateSize1);
 
     }
 }
