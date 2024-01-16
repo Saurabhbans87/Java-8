@@ -16,8 +16,12 @@ public class ForEachExample {
         cityList.add("Gurgaon");
         cityList.add("Gorakhpur");
         cityList.add("Bangalore");
-
+        System.out.println("************Using forEach with a Consumer************");
+        cityList.forEach(str->System.out.println(str));
+        System.out.println("************Using forEach on a stream************");
         cityList.stream().forEach(str -> System.out.println(str));
+        System.out.println("************Shorter syntax using method reference************");
+        cityList.stream().forEach(System.out::println);
 
     }
 }
