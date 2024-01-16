@@ -31,10 +31,16 @@ public class ForEachExample {
         stringMap.put(3,"NIT");
 
         stringMap.forEach((rank,collegeName) -> System.out.println(rank +"--" +collegeName));
-        System.out.println("************Iterate a Map with condition************");
+        System.out.println("************Iterate a Map with college name************");
         stringMap.forEach((rank,collgeName) -> {
             if(collgeName == "NIT"){
                 System.out.println(rank +" "+collgeName);
+            }
+        });
+        System.out.println("************Iterate a Map with rank************");
+        stringMap.forEach((rank,collegeName) -> {
+            if(rank == 1){
+                System.out.println(rank + " "+collegeName);
             }
         });
 
