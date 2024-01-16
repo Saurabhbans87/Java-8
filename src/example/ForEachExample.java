@@ -6,7 +6,9 @@
 package example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ForEachExample {
     public static void main(String[] args) {
@@ -22,6 +24,19 @@ public class ForEachExample {
         cityList.stream().forEach(str -> System.out.println(str));
         System.out.println("************Shorter syntax using method reference************");
         cityList.stream().forEach(System.out::println);
+        System.out.println("************Iterate a Map************");
+        Map<Integer,String> stringMap = new HashMap<>();
+        stringMap.put(1,"IIT");
+        stringMap.put(2,"IIT");
+        stringMap.put(3,"NIT");
+
+        stringMap.forEach((rank,collegeName) -> System.out.println(rank +"--" +collegeName));
+        System.out.println("************Iterate a Map with condition************");
+        stringMap.forEach((rank,collgeName) -> {
+            if(collgeName == "NIT"){
+                System.out.println(rank +" "+collgeName);
+            }
+        });
 
     }
 }
