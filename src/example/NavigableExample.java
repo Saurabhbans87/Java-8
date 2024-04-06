@@ -21,6 +21,7 @@ public class NavigableExample {
         navigableMap.put(8,"Eight");
         navigableMap.put(9,"Nine");
         navigableMap.put(10,"Ten");
+        navigableMap.put(11,"Eleven");
         System.out.println("************************************descendingMap*********************************");
         System.out.println("descendingMap" + navigableMap.descendingMap());
         System.out.println("************************************descendingKeyMap*********************************");
