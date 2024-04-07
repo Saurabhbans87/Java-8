@@ -8,7 +8,7 @@ package example;
 public class SquareDemo {
     public static void main(String[] args) {
         Square square = (x) -> x * x;
-        int calculate = square.calculate(5);
+        int calculate = square.calculate(10);
         System.out.println(calculate);
     }
 }
