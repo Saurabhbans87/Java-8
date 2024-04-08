@@ -29,6 +29,7 @@ public class ForEachExample {
         stringMap.put(1,"IIT");
         stringMap.put(2,"IIT");
         stringMap.put(3,"NIT");
+        stringMap.put(4,"REC");
 
         stringMap.forEach((rank,collegeName) -> System.out.println(rank +"--" +collegeName));
         System.out.println("************Iterate a Map with college name************");
