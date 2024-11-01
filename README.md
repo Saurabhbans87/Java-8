@@ -45,4 +45,156 @@ For no-parameter lambda expressions, use empty parentheses.
     return square;
 }
 ```
+# Functional iInterfaces
+A functional interface is an interface with a single abstract method (SAM), often referred to as a SAM interface. 
+## Example of a Simple Functional Interface:
+```java
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void display(String message);
+}
+```
+With this interface, we can create a lambda expression that provides an implementation for the display method:
+```java
+public class FunctionalInterfaceExample {
+    public static void main(String[] args) {
+        MyFunctionalInterface func = message -> System.out.println("Message: " + message);
+        func.display("Hello, Functional Interface!");
+    }
+}
+```
+# Rules for Functional Interfaces
+1. Single Abstract Method: A functional interface can have only one abstract method.
+2. Object Class Methods: It can have other methods if they are default, static, or methods from Object (like toString, equals, hashCode), as they don’t count as abstract methods.
+3. @FunctionalInterface Annotation: This is optional but highly recommended, as it helps prevent accidental addition of extra abstract methods.
+
+## Common Functional Interfaces in Java 8 (java.util.function Package)
+Java 8 provides several built-in functional interfaces in the java.util.function package. Here are some of the most commonly used ones:
+### Predicate<T>
+Represents a condition (boolean-valued function) that takes one argument.
+
+* Method: boolean test(T t)
+* Usage: Often used for filtering in collections.
+```java
+import java.util.function.Predicate;
+
+public class PredicateExample {
+    public static void main(String[] args) {
+        Predicate<Integer> isEven = number -> number % 2 == 0;
+        System.out.println(isEven.test(4));  // true
+        System.out.println(isEven.test(3));  // false
+    }
+}
+```
+### Consumer<T>
+Represents an operation that takes a single argument and returns no result.
+
+* Method: void accept(T t)
+* Usage: Commonly used in scenarios where an action is performed, such as printing or updating a value.
+```java
+import java.util.function.Consumer;
+
+public class ConsumerExample {
+    public static void main(String[] args) {
+        Consumer<String> printMessage = message -> System.out.println("Message: " + message);
+        printMessage.accept("Hello, Consumer!");  // Output: Message: Hello, Consumer!
+    }
+}
+```
+### Function<T, R>
+Represents a function that takes one argument and produces a result.
+
+* Method: R apply(T t)
+* Usage: Used for transforming data.
+```java
+import java.util.function.Function;
+
+public class FunctionExample {
+    public static void main(String[] args) {
+        Function<String, Integer> lengthCalculator = str -> str.length();
+        System.out.println(lengthCalculator.apply("Hello"));  // Output: 5
+    }
+}
+```
+### Supplier<T>
+Represents a supplier of results with no input argument.
+
+* Method: T get()
+* Usage: Often used to delay the creation of expensive objects or to generate new values.
+```java
+import java.util.function.Supplier;
+
+public class SupplierExample {
+    public static void main(String[] args) {
+        Supplier<Double> randomValue = () -> Math.random();
+        System.out.println(randomValue.get());  // Output: Random value like 0.453432
+    }
+}
+```
+### BiFunction<T, U, R>
+Represents a function that takes two arguments and produces a result.
+
+* Method: R apply(T t, U u)
+* Usage: Useful when two parameters are needed for computation.
+```java
+import java.util.function.BiFunction;
+
+public class BiFunctionExample {
+    public static void main(String[] args) {
+        BiFunction<Integer, Integer, Integer> multiply = (a, b) -> a * b;
+        System.out.println(multiply.apply(5, 3));  // Output: 15
+    }
+}
+```
+### UnaryOperator<T>
+A specialization of Function that takes a single parameter and returns a result of the same type.
+
+* Method: T apply(T t)
+* Usage: Often used for transformations that don't change the type.
+```java
+import java.util.function.UnaryOperator;
+
+public class UnaryOperatorExample {
+    public static void main(String[] args) {
+        UnaryOperator<Integer> square = x -> x * x;
+        System.out.println(square.apply(5));  // Output: 25
+    }
+}
+```
+### BinaryOperator<T>
+A specialization of BiFunction for cases where both parameters and the return type are the same.
+
+* Method: T apply(T t1, T t2)
+* Usage: Often used in reduction operations like summing or comparing two values of the same type.
+```java
+import java.util.function.BinaryOperator;
+
+public class BinaryOperatorExample {
+    public static void main(String[] args) {
+        BinaryOperator<Integer> sum = (a, b) -> a + b;
+        System.out.println(sum.apply(5, 3));  // Output: 8
+    }
+}
+```
+### BiConsumer<T, U>
+Represents an operation that takes two arguments and returns no result.
+
+* Method: void accept(T t, U u)
+* Usage: Useful when performing actions involving two objects, like updating or printing.
+```java
+import java.util.function.BiConsumer;
+
+public class BiConsumerExample {
+    public static void main(String[] args) {
+        BiConsumer<String, Integer> printMessageWithCount = (message, count) ->
+            System.out.println(message + " printed " + count + " times.");
+
+        printMessageWithCount.accept("Hello", 3);  // Output: Hello printed 3 times.
+    }
+}
+```
+
+
+
+
 
