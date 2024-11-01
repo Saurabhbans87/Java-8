@@ -193,6 +193,88 @@ public class BiConsumerExample {
     }
 }
 ```
+# Method References
+Method references are a shorthand representation lambda expressions.
+## Types of Method References
+There are four main types of method references:
+
+* Reference to a static method — ClassName::staticMethodName
+* Reference to an instance method of a particular object — instance::instanceMethodName
+* Reference to an instance method of an arbitrary object of a particular type — ClassName::instanceMethodName
+* Reference to a constructor — ClassName::new
+### Reference to a Static Method
+Let’s say we have a utility class with a static method for printing a string:
+```java
+class Utility {
+    public static void printMessage(String message) {
+        System.out.println("Message: " + message);
+    }
+}
+
+public class StaticMethodReference {
+    public static void main(String[] args) {
+        Consumer<String> consumer = Utility::printMessage;
+        consumer.accept("Hello, Static Method Reference!");
+    }
+}
+```
+### Reference to an Instance Method of a Particular Object
+This type is used when you want to refer to an instance method of a specific, known object. It replaces a lambda expression where the lambda’s body calls an instance method on that particular object.
+```java
+public class InstanceMethodReference {
+    public void print(String message) {
+        System.out.println("Instance message: " + message);
+    }
+
+    public static void main(String[] args) {
+        InstanceMethodReference instance = new InstanceMethodReference();
+        Consumer<String> consumer = instance::print;
+        consumer.accept("Hello, Instance Method Reference!");
+    }
+}
+```
+### Reference to an Instance Method of an Arbitrary Object of a Particular Type
+This type of method reference is used when we have a lambda expression that calls an instance method on the parameter passed to it. This is useful in scenarios where you want to call a method on each element of a stream.
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class ArbitraryObjectMethodReference {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+
+        // Using method reference to call `toUpperCase` on each element
+        names.stream()
+             .map(String::toUpperCase)
+             .forEach(System.out::println);
+    }
+}
+```
+### Reference to a Constructor
+This type of method reference is used when you want to refer to a constructor, often for creating new instances of a class. It replaces a lambda expression where the lambda’s body calls a constructor.
+```java
+class Person {
+    private String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "name='" + name + '\'' + '}';
+    }
+}
+
+public class ConstructorReference {
+    public static void main(String[] args) {
+        Supplier<Person> personSupplier = Person::new;
+        Person person = personSupplier.get();
+        System.out.println(person);  // Output: Person{name='null'}
+    }
+}
+```
+
 
 
 
